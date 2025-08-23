@@ -1,0 +1,24 @@
+{
+  "type": "task.envelope.v1",
+  "task_id": "uuid",
+  "goal": "Draft scene S1 from outline node N1.",
+  "inputs": {
+    "outline_ids": ["outline:N1"],
+    "lore_ids": ["lore:electrokinesis", "lore:city:sector7"],
+    "voice_ids": ["voice:Zara"],
+    "style_guide_id": "style:ed_main",
+    "constraints": {
+      "pov": "1st_limited",
+      "tense": "present",
+      "rating": "R",
+      "length_tokens": 1200
+    },
+    "targets": {
+      "flesch": 80,
+      "avg_sentence_len": 13,
+      "tone": -0.3
+    }
+  },
+  "required_tools": ["files", "metrics", "continuity"],
+  "return": ["artifact", "log"]
+}

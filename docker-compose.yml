@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: autonomoussphere
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  minio:
+    image: minio/minio:latest
+    restart: always
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-minioadmin}
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+
+  # Application Services
+  files-mcp:
+    build:
+      context: ./apps/tools/files-mcp
+    ports:
+      - "8001:8000"
+    # env_file: .env # To be used when connecting to S3 etc.
+
+  showrunner:
+    build:
+      context: ./apps/showrunner
+    ports:
+      - "8002:8000"
+    depends_on:
+      - postgres
+      - redis
+      - files-mcp # showrunner might need to interact with files
+      - prose # showrunner calls prose agent
+    # env_file: .env
+
+  prose:
+    build:
+      context: ./apps/agents/prose
+    ports:
+      - "8003:8000"
+    # env_file: .env
+
+  # web-ui:
+  #   build:
+  #     context: ./apps/web-ui
+  #   ports:
+  #     - "3000:3000"
+
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:

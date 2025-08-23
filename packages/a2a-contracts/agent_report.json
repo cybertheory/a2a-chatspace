@@ -1,0 +1,17 @@
+{
+  "type": "report.v1",
+  "task_id": "uuid",
+  "artifact": {
+    "type": "scene_draft",
+    "path": "s3://.../scene_s1_v1.md",
+    "meta": {
+      "agent_role": "prose",
+      "model_id": "anthropic/claude-3.5-sonnet",
+      "tokens_in": 2800,
+      "tokens_out": 1200,
+      "cost": 0.94
+    }
+  },
+  "logs": ["used metrics tool", "fixed POV drift"],
+  "needs": []
+}
