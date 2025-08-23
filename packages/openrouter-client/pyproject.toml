@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "openrouter-client"
+version = "0.1.0"
+description = "Client for interacting with OpenRouter API."
+authors = ["AutonomousSphere Team"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+httpx = "^0.27.0"
+tenacity = "^8.2.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
