@@ -15,9 +15,9 @@ def get_gemini_response(prompt: str) -> str:
     full_response = ""
     for chunk in stream:
         if hasattr(chunk, 'text'):
-            print(chunk.text, end="", flush=True)  # Stream to console
+            #print(chunk.text, end="", flush=True)  # Stream to console
             full_response += chunk.text
-    print()  # Newline after streaming
+    #print()  # Newline after streaming
     return full_response
 
 # For standalone testing

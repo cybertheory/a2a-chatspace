@@ -39,9 +39,9 @@ def get_ollama_response(prompt: str) -> str:
     full_response = ""
     for chunk in stream:
         content = chunk.get("message", {}).get("content", "")
-        print(content, end="", flush=True)  # Stream to console
+        #print(content, end="", flush=True)  # Stream to console
         full_response += content
-    print()  # Newline after streaming
+    #print()  # Newline after streaming
 
     return full_response
 
