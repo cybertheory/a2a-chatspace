@@ -1,5 +1,5 @@
-from llm1_bot import get_gemini_response
-from llm2_bot import get_ollama_response
+from llm1.llm1_bot import get_gemini_response
+from llm2.llm2_bot import get_ollama_response
 
 def start_conversation(initial_prompt="Hello!"):
     turn = 0
