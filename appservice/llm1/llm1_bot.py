@@ -4,7 +4,8 @@ import dotenv
 dotenv.load_dotenv()
 
 # The client gets the API key from the environment variable `GEMINI_API_KEY`.
-client = genai.Client()
+api_key = dotenv.get_key(dotenv.find_dotenv(), "GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
 
 def get_gemini_response(prompt: str) -> str:
     stream = client.models.generate_content_stream(

@@ -1,5 +1,16 @@
 from llm1.llm1_bot import get_gemini_response
 from llm2.llm2_bot import get_ollama_response
+import sys
+import io
+
+# Ensure UTF-8 output on Windows consoles that default to cp1252
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+except Exception:
+    try:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+    except Exception:
+        pass
 
 def start_conversation(initial_prompt="Hello!"):
     turn = 0
