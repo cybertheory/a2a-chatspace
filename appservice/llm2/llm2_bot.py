@@ -1,9 +1,10 @@
+import subprocess
+import sys
 try:
     import ollama
-    _OLLAMA_AVAILABLE = True
 except Exception:
-    ollama = None
-    _OLLAMA_AVAILABLE = False
+    subprocess.run([sys.executable, "-m", "pip", "install", "ollama"], check=False)
+_OLLAMA_AVAILABLE = True
 
 model_name = 'llama2'
 
